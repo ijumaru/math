@@ -19,7 +19,7 @@ class Cos {
 						break;
 					default:
 						$degree = 45;
-						$degree = $this->calculate($this->cos, $degree, 1);
+						$degree = $this->toDegreeCore($this->cos, $degree, 1);
 						break;
 				}
 			}
@@ -27,7 +27,7 @@ class Cos {
 		return $degree;
 	}
 
-	private function calculate($cos, $degree, $step) {
+	private function toDegreeCore($cos, $degree, $step) {
 		$this->log.= 'degree='.$degree.", step=".$step."<br>";
 		$deg2cos = cos(deg2rad($degree));
 		$dif = $cos - $deg2cos;
@@ -36,11 +36,10 @@ class Cos {
 			if ($difdig > self::$error) {
 				if ($dif > 0) {
 					$degree = $degree - $difdig;
-					$degree = $this->calculate($cos, $degree, $step + 1);
 				} else if ($dif < 0) {
 					$degree = $degree + $difdig;
-					$degree = $this->calculate($cos, $degree, $step + 1);
 				}
+				$degree = $this->toDegreeCore($cos, $degree, $step + 1);
 			}
 		}
 		return $degree;
