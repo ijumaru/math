@@ -26,12 +26,15 @@ function calculate($cos, $degree, $step) {
 	$dif = $cos - $deg2cos;
 	$error = 0.0001;
 	if (abs($dif) > $error) {
-		if ($dif > 0) {
-			echo 'deg', $degree = $degree - $degree / pow(2, $step), '<br>';
-			$degree = calculate($cos, $degree, $step + 1);
-		} else if ($dif < 0) {
-			echo 'deg', $degree = $degree + $degree / pow(2, $step), '<br>';
-			$degree = calculate($cos, $degree, $step + 1);
+		echo 'difdig', $difdig = 45 / pow(2, $step), '<br>';
+		if ($difdig > $error) {
+			if ($dif > 0) {
+				echo 'deg', $degree = $degree - $difdig, '<br>';
+				$degree = calculate($cos, $degree, $step + 1);
+			} else if ($dif < 0) {
+				echo 'deg', $degree = $degree + $difdig, '<br>';
+				$degree = calculate($cos, $degree, $step + 1);
+			}
 		}
 	}
 	return $degree;
