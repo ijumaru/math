@@ -8,7 +8,8 @@ class Cos {
 	}
 
 	public function toDegree() {
-		if (!is_nan($this->cos)) {
+		$degree = null;
+		if (is_numeric($this->cos) && !is_nan($this->cos)) {
 			if ($this->cos >= 0 && $this->cos <= 1) {
 				switch ($this->cos) {
 					case 1:
@@ -28,7 +29,7 @@ class Cos {
 	}
 
 	private function toDegreeCore($cos, $degree, $step) {
-		$this->log.= 'degree='.$degree.", step=".$step."<br>";
+		$this->log.= 'degree='.$degree.", step=".$step.PHP_EOL;
 		$deg2cos = cos(deg2rad($degree));
 		$dif = $cos - $deg2cos;
 		if (abs($dif) > self::$error) {

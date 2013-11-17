@@ -4,10 +4,10 @@ $cos = null;
 $degree = null;
 if (isset($_POST["cos"])) {
 	$cos = $_POST["cos"];
-	if (!is_nan($cos)) {
+	if (is_numeric($cos) && !is_nan($cos)) {
 		$coss = new Cos($cos);
 		$degree = $coss->toDegree();
-		echo $coss->getLog();
+		echo nl2br($coss->getLog());
 	}
 }
 ?>
