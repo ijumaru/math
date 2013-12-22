@@ -1,16 +1,17 @@
 <?php
 class Cos {
-	private static $error = 0.0001;
+	private static $error = 0.0000000000001;
 	private $cos;
 	private $log = '';
+
 	public function __construct($cos) {
 		$this->cos = $cos;
 	}
 
 	public function toDegree() {
 		$degree = null;
-		if (is_numeric($this->cos) && !is_nan($this->cos)) {
-			if ($this->cos >= 0 && $this->cos <= 1) {
+		if (is_numeric($this->cos)) {
+			if ($this->cos >= -1 && $this->cos <= 1) {
 				switch ($this->cos) {
 					case 1:
 						$degree = 0;
@@ -18,8 +19,15 @@ class Cos {
 					case 0:
 						$degree = 90;
 						break;
+					case -1:
+						$degree = 180;
+						break;
 					default:
-						$degree = 45;
+						if ($this->cos > 0) {
+							$degree = 45;
+						} else {
+							$degree = 135;
+						}
 						$degree = $this->toDegreeCore($this->cos, $degree, 1);
 						break;
 				}
